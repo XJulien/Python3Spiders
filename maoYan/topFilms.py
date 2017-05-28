@@ -6,6 +6,7 @@
 '''
 
 from urllib import request
+from multiprocessing import Pool
 import re
 
 def getPageIndex(offset=0):
@@ -37,3 +38,15 @@ def main():
 
 if __name__ == '__main__':
     main()
+
+'''
+使用多进程
+def main(offset):
+    html = getPageIndex(offset)
+    for item in getContent(html):
+        print(item)
+
+if __name__ == '__main__':
+    pool = Pool()
+    pool.map(main, [i*10 for i in range(10)])
+'''
