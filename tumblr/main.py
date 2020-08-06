@@ -1,5 +1,6 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
+
 '''
 @author Julien
 @date 2017-05-31
@@ -25,11 +26,12 @@ proxies = {
 #{{按需修改}} 设置抓取帖子点赞数限制  低于点赞数的不会抓取
 setLimit = 1000
 
+
+'''
+获取抓取目标总页数
+:return: int(pages)
+'''
 def getPageNum():
-    '''
-    获取抓取目标总页数
-    :return: int(pages)
-    '''
     r = requests.get(URL, proxies=proxies)
     setRe = re.compile(r'data-total-pages="(\d*?)">')
     result = setRe.search(r.text)
@@ -127,6 +129,7 @@ def getContent(data):
     else:
         return None
 
+
 def useMap(li):
     liData = list(li)
     return {
@@ -135,6 +138,7 @@ def useMap(li):
         'post': liData[1],
         'notes': int(liData[2].replace(',', ''))
     }
+
 
 def useFilter(li):
     return li['notes'] > setLimit
